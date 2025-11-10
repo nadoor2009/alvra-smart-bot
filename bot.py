@@ -1,8 +1,9 @@
+import os
 from telebot import TeleBot
 import random
 
-# ضع التوكن هنا من BotFather 👇
-bot = TeleBot("YOUR_BOT_TOKEN_HERE")
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+bot = TeleBot(BOT_TOKEN)
 
 # قائمة الأسئلة والأجوبة
 riddles = [
