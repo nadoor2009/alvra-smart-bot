@@ -117,3 +117,28 @@ def run_schedule():
 
 threading.Thread(target=run_schedule, daemon=True).start()
 bot.polling()
+
+import schedule
+import time
+
+from datetime import datetime
+from telebot import TeleBot
+
+BOT_TOKEN = "ضع التوكن هنا"
+CHANNEL_ID = "@اسم_القناة_حقك"  # مثلاً @alvra_daily
+
+bot = TeleBot(BOT_TOKEN)
+
+def send_daily_message():
+    message = f"🧠 لغز اليوم ({datetime.now().strftime('%d %B %Y')})\n\n" \
+              "ما هو الشيء الذي كلما أخذت منه كبر؟ 🤔"
+    bot.send_message(CHANNEL_ID, message)
+
+# جدول إرسال الرسائل كل يوم الساعة 9 صباحًا
+schedule.every().day.at("09:00").do(send_daily_message)
+
+print("⏰ بدء النشر التلقائي اليومي...")
+while True:
+    schedule.run_pending()
+    time.sleep(60)
+
